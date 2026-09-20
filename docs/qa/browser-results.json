@@ -1,5 +1,5 @@
 {
-  "mode": "CPU compatibility",
+  "mode": "WebGL2",
   "loading": "offline set_content",
   "checks": [
     {

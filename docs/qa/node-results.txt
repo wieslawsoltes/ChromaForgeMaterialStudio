@@ -1,75 +1,411 @@
-▶ authenticated HTTP, SQLite persistence, roles and WebSocket collaboration integration
-  ✔ health endpoint and source site are reachable (32.388134ms)
-  ✔ unauthenticated access and arbitrary origin writes are denied (10.763129ms)
-  ✔ data, server files and traversal are not served (19.799711ms)
-  ✔ account registration issues strict HttpOnly sessions (137.651206ms)
-  ✔ bad credentials and short passwords are rejected (46.633526ms)
-  ✔ only members can read a shared project (5.154184ms)
-  ✔ editor and viewer invitation roles are enforced (7.783143ms)
-  ✔ WebSocket join returns authoritative history and presence (0.880359ms)
-  ✔ accepted edits broadcast and are acknowledged (2.127179ms)
-  ✔ duplicate operation delivery does not duplicate the journal (4.800372ms)
-  ✔ viewer writes and cross-actor impersonation are rejected (1.256915ms)
-  ✔ owners cannot undo another member’s operation (0.749556ms)
-  ✔ cursor positions broadcast with authenticated attribution (0.666213ms)
-  ✔ live owner role changes immediately deny future edits (2.45331ms)
-  ✔ revoked invitation cannot be used again (4.297601ms)
-  ✔ malformed material patch is rejected over the socket (1.907915ms)
-  ✔ database and session survive process restart; late joins replay the journal (85.826493ms)
-  ✔ logout invalidates the session (3.987143ms)
-✔ authenticated HTTP, SQLite persistence, roles and WebSocket collaboration integration (452.943294ms)
-✔ offline collaboration stores the operation before pending transmission (8.80495ms)
-✔ room switch during an outbox write cannot send into the next room (2.171293ms)
-✔ viewer local edits are rolled back without entering the outbox (1.256383ms)
-✔ matrix inverse preserves an affine transform (2.041592ms)
-✔ singular inverse throws explicitly (0.499477ms)
-✔ ray triangle returns barycentric coordinates (0.346471ms)
-✔ ray AABB handles parallel directions (0.309497ms)
-✔ camera center ray points at target (0.530292ms)
-✔ default project passes strict validation (3.470129ms)
-✔ material IDs and inline style colors reject injection (0.73861ms)
-✔ duplicate project layer IDs are rejected (0.276408ms)
-✔ layer operation, visibility, order and delete reduce correctly (2.119007ms)
-✔ concurrent operations converge regardless of arrival order (2.330288ms)
-✔ independent concurrent changes survive (1.554894ms)
-✔ duplicate delivery is idempotent (0.554619ms)
-✔ local undo does not undo another artist (0.843184ms)
-✔ forged cross-actor undo is not applied by replica (0.378719ms)
-✔ strokes retain pressure and seam breaks (0.656709ms)
-✔ invalid imported operation leaves current project unchanged (0.568929ms)
-✔ invalid operation batch is atomic (0.261466ms)
-✔ project roundtrip preserves operation history and state (0.570232ms)
-✔ schema forbids non-finite and unsafe material values (0.304599ms)
-✔ stroke size, coordinate and payload validation (0.31851ms)
-✔ comment resolution replays and can be undone (0.811317ms)
-✔ CRC32 matches known test vector (0.126016ms)
-✔ ZIP central directory, UTF-8 name and file CRC are valid (0.501941ms)
-✔ ZIP traversal and absolute path entries are rejected (0.346542ms)
-✔ sample camera has four materials and finite interleaved geometry (148.986324ms)
-✔ sphere BVH returns UV surface hit and respects visibility (34.931997ms)
-✔ BVH misses geometry outside bounds (9.186823ms)
-✔ OBJ negative indices and fan triangulation (0.631452ms)
-✔ OBJ export reimports geometry and UVs (132.751994ms)
-✔ OBJ invalid vertex reference is rejected (0.533567ms)
-✔ glTF embedded static geometry and scene transform import (1.144919ms)
-✔ glTF unsupported required extensions fail clearly (0.256138ms)
-✔ glTF scene cycles are rejected (0.732301ms)
-✔ geometry map baking produces real opaque pixels and AO (38.47971ms)
-✔ baking observes cancellation (23.247638ms)
-✔ all original material presets produce finite bounded channel values (0.796896ms)
-✔ standalone mesh validates NaN and material-index boundaries (9.392177ms)
-✔ baker rejects invalid dimensions, sample budgets and materials (9.376909ms)
-✔ RFC6455 masked text and split TCP packets decode (1.523879ms)
-✔ RFC6455 fragmented text reconstructs UTF-8 (0.404116ms)
-✔ RFC6455 unmasked client frames are rejected (0.362264ms)
-✔ RFC6455 ping receives pong (0.233675ms)
-✔ RFC6455 invalid UTF-8 is rejected (0.222908ms)
-✔ RFC6455 message budget rejects excessive payload (0.217831ms)
-ℹ tests 66
-ℹ suites 0
-ℹ pass 66
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 536.404382
+
+> chromaforge-workspace@0.1.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: authenticated HTTP, SQLite persistence, roles and WebSocket collaboration integration
+    # Subtest: health endpoint and source site are reachable
+    ok 1 - health endpoint and source site are reachable
+      ---
+      duration_ms: 31.815688
+      type: 'test'
+      ...
+    # Subtest: unauthenticated access and arbitrary origin writes are denied
+    ok 2 - unauthenticated access and arbitrary origin writes are denied
+      ---
+      duration_ms: 20.014807
+      type: 'test'
+      ...
+    # Subtest: data, server files and traversal are not served
+    ok 3 - data, server files and traversal are not served
+      ---
+      duration_ms: 13.710597
+      type: 'test'
+      ...
+    # Subtest: account registration issues strict HttpOnly sessions
+    ok 4 - account registration issues strict HttpOnly sessions
+      ---
+      duration_ms: 157.019543
+      type: 'test'
+      ...
+    # Subtest: bad credentials and short passwords are rejected
+    ok 5 - bad credentials and short passwords are rejected
+      ---
+      duration_ms: 56.896551
+      type: 'test'
+      ...
+    # Subtest: only members can read a shared project
+    ok 6 - only members can read a shared project
+      ---
+      duration_ms: 13.471643
+      type: 'test'
+      ...
+    # Subtest: editor and viewer invitation roles are enforced
+    ok 7 - editor and viewer invitation roles are enforced
+      ---
+      duration_ms: 19.966454
+      type: 'test'
+      ...
+    # Subtest: WebSocket join returns authoritative history and presence
+    ok 8 - WebSocket join returns authoritative history and presence
+      ---
+      duration_ms: 1.583295
+      type: 'test'
+      ...
+    # Subtest: accepted edits broadcast and are acknowledged
+    ok 9 - accepted edits broadcast and are acknowledged
+      ---
+      duration_ms: 3.519456
+      type: 'test'
+      ...
+    # Subtest: duplicate operation delivery does not duplicate the journal
+    ok 10 - duplicate operation delivery does not duplicate the journal
+      ---
+      duration_ms: 6.535363
+      type: 'test'
+      ...
+    # Subtest: viewer writes and cross-actor impersonation are rejected
+    ok 11 - viewer writes and cross-actor impersonation are rejected
+      ---
+      duration_ms: 6.044579
+      type: 'test'
+      ...
+    # Subtest: owners cannot undo another member’s operation
+    ok 12 - owners cannot undo another member’s operation
+      ---
+      duration_ms: 1.828483
+      type: 'test'
+      ...
+    # Subtest: cursor positions broadcast with authenticated attribution
+    ok 13 - cursor positions broadcast with authenticated attribution
+      ---
+      duration_ms: 1.525812
+      type: 'test'
+      ...
+    # Subtest: live owner role changes immediately deny future edits
+    ok 14 - live owner role changes immediately deny future edits
+      ---
+      duration_ms: 5.760271
+      type: 'test'
+      ...
+    # Subtest: revoked invitation cannot be used again
+    ok 15 - revoked invitation cannot be used again
+      ---
+      duration_ms: 10.09695
+      type: 'test'
+      ...
+    # Subtest: malformed material patch is rejected over the socket
+    ok 16 - malformed material patch is rejected over the socket
+      ---
+      duration_ms: 1.468416
+      type: 'test'
+      ...
+    # Subtest: database and session survive process restart; late joins replay the journal
+    ok 17 - database and session survive process restart; late joins replay the journal
+      ---
+      duration_ms: 116.003279
+      type: 'test'
+      ...
+    # Subtest: logout invalidates the session
+    ok 18 - logout invalidates the session
+      ---
+      duration_ms: 10.411641
+      type: 'test'
+      ...
+    1..18
+ok 1 - authenticated HTTP, SQLite persistence, roles and WebSocket collaboration integration
+  ---
+  duration_ms: 644.440119
+  type: 'test'
+  ...
+# Subtest: offline collaboration stores the operation before pending transmission
+ok 2 - offline collaboration stores the operation before pending transmission
+  ---
+  duration_ms: 11.849225
+  type: 'test'
+  ...
+# Subtest: room switch during an outbox write cannot send into the next room
+ok 3 - room switch during an outbox write cannot send into the next room
+  ---
+  duration_ms: 6.193135
+  type: 'test'
+  ...
+# Subtest: viewer local edits are rolled back without entering the outbox
+ok 4 - viewer local edits are rolled back without entering the outbox
+  ---
+  duration_ms: 2.423811
+  type: 'test'
+  ...
+# Subtest: matrix inverse preserves an affine transform
+ok 5 - matrix inverse preserves an affine transform
+  ---
+  duration_ms: 2.687909
+  type: 'test'
+  ...
+# Subtest: singular inverse throws explicitly
+ok 6 - singular inverse throws explicitly
+  ---
+  duration_ms: 0.670377
+  type: 'test'
+  ...
+# Subtest: ray triangle returns barycentric coordinates
+ok 7 - ray triangle returns barycentric coordinates
+  ---
+  duration_ms: 0.49685
+  type: 'test'
+  ...
+# Subtest: ray AABB handles parallel directions
+ok 8 - ray AABB handles parallel directions
+  ---
+  duration_ms: 0.308252
+  type: 'test'
+  ...
+# Subtest: camera center ray points at target
+ok 9 - camera center ray points at target
+  ---
+  duration_ms: 0.816164
+  type: 'test'
+  ...
+# Subtest: default project passes strict validation
+ok 10 - default project passes strict validation
+  ---
+  duration_ms: 5.257968
+  type: 'test'
+  ...
+# Subtest: material IDs and inline style colors reject injection
+ok 11 - material IDs and inline style colors reject injection
+  ---
+  duration_ms: 0.974148
+  type: 'test'
+  ...
+# Subtest: duplicate project layer IDs are rejected
+ok 12 - duplicate project layer IDs are rejected
+  ---
+  duration_ms: 0.396778
+  type: 'test'
+  ...
+# Subtest: layer operation, visibility, order and delete reduce correctly
+ok 13 - layer operation, visibility, order and delete reduce correctly
+  ---
+  duration_ms: 2.300801
+  type: 'test'
+  ...
+# Subtest: concurrent operations converge regardless of arrival order
+ok 14 - concurrent operations converge regardless of arrival order
+  ---
+  duration_ms: 2.823685
+  type: 'test'
+  ...
+# Subtest: independent concurrent changes survive
+ok 15 - independent concurrent changes survive
+  ---
+  duration_ms: 1.11684
+  type: 'test'
+  ...
+# Subtest: duplicate delivery is idempotent
+ok 16 - duplicate delivery is idempotent
+  ---
+  duration_ms: 0.597001
+  type: 'test'
+  ...
+# Subtest: local undo does not undo another artist
+ok 17 - local undo does not undo another artist
+  ---
+  duration_ms: 2.183202
+  type: 'test'
+  ...
+# Subtest: forged cross-actor undo is not applied by replica
+ok 18 - forged cross-actor undo is not applied by replica
+  ---
+  duration_ms: 0.528457
+  type: 'test'
+  ...
+# Subtest: strokes retain pressure and seam breaks
+ok 19 - strokes retain pressure and seam breaks
+  ---
+  duration_ms: 0.925536
+  type: 'test'
+  ...
+# Subtest: invalid imported operation leaves current project unchanged
+ok 20 - invalid imported operation leaves current project unchanged
+  ---
+  duration_ms: 1.137082
+  type: 'test'
+  ...
+# Subtest: invalid operation batch is atomic
+ok 21 - invalid operation batch is atomic
+  ---
+  duration_ms: 0.495828
+  type: 'test'
+  ...
+# Subtest: project roundtrip preserves operation history and state
+ok 22 - project roundtrip preserves operation history and state
+  ---
+  duration_ms: 2.007312
+  type: 'test'
+  ...
+# Subtest: schema forbids non-finite and unsafe material values
+ok 23 - schema forbids non-finite and unsafe material values
+  ---
+  duration_ms: 0.401819
+  type: 'test'
+  ...
+# Subtest: stroke size, coordinate and payload validation
+ok 24 - stroke size, coordinate and payload validation
+  ---
+  duration_ms: 0.427774
+  type: 'test'
+  ...
+# Subtest: comment resolution replays and can be undone
+ok 25 - comment resolution replays and can be undone
+  ---
+  duration_ms: 0.740144
+  type: 'test'
+  ...
+# Subtest: CRC32 matches known test vector
+ok 26 - CRC32 matches known test vector
+  ---
+  duration_ms: 0.193539
+  type: 'test'
+  ...
+# Subtest: ZIP central directory, UTF-8 name and file CRC are valid
+ok 27 - ZIP central directory, UTF-8 name and file CRC are valid
+  ---
+  duration_ms: 0.802696
+  type: 'test'
+  ...
+# Subtest: ZIP traversal and absolute path entries are rejected
+ok 28 - ZIP traversal and absolute path entries are rejected
+  ---
+  duration_ms: 0.693115
+  type: 'test'
+  ...
+# Subtest: sample camera has four materials and finite interleaved geometry
+ok 29 - sample camera has four materials and finite interleaved geometry
+  ---
+  duration_ms: 239.552576
+  type: 'test'
+  ...
+# Subtest: sphere BVH returns UV surface hit and respects visibility
+ok 30 - sphere BVH returns UV surface hit and respects visibility
+  ---
+  duration_ms: 56.261848
+  type: 'test'
+  ...
+# Subtest: BVH misses geometry outside bounds
+ok 31 - BVH misses geometry outside bounds
+  ---
+  duration_ms: 16.880204
+  type: 'test'
+  ...
+# Subtest: OBJ negative indices and fan triangulation
+ok 32 - OBJ negative indices and fan triangulation
+  ---
+  duration_ms: 1.06953
+  type: 'test'
+  ...
+# Subtest: OBJ export reimports geometry and UVs
+ok 33 - OBJ export reimports geometry and UVs
+  ---
+  duration_ms: 273.914018
+  type: 'test'
+  ...
+# Subtest: OBJ invalid vertex reference is rejected
+ok 34 - OBJ invalid vertex reference is rejected
+  ---
+  duration_ms: 0.747337
+  type: 'test'
+  ...
+# Subtest: glTF embedded static geometry and scene transform import
+ok 35 - glTF embedded static geometry and scene transform import
+  ---
+  duration_ms: 1.943357
+  type: 'test'
+  ...
+# Subtest: glTF unsupported required extensions fail clearly
+ok 36 - glTF unsupported required extensions fail clearly
+  ---
+  duration_ms: 0.426312
+  type: 'test'
+  ...
+# Subtest: glTF scene cycles are rejected
+ok 37 - glTF scene cycles are rejected
+  ---
+  duration_ms: 0.795066
+  type: 'test'
+  ...
+# Subtest: geometry map baking produces real opaque pixels and AO
+ok 38 - geometry map baking produces real opaque pixels and AO
+  ---
+  duration_ms: 68.602159
+  type: 'test'
+  ...
+# Subtest: baking observes cancellation
+ok 39 - baking observes cancellation
+  ---
+  duration_ms: 34.738446
+  type: 'test'
+  ...
+# Subtest: all original material presets produce finite bounded channel values
+ok 40 - all original material presets produce finite bounded channel values
+  ---
+  duration_ms: 1.534558
+  type: 'test'
+  ...
+# Subtest: standalone mesh validates NaN and material-index boundaries
+ok 41 - standalone mesh validates NaN and material-index boundaries
+  ---
+  duration_ms: 13.517389
+  type: 'test'
+  ...
+# Subtest: baker rejects invalid dimensions, sample budgets and materials
+ok 42 - baker rejects invalid dimensions, sample budgets and materials
+  ---
+  duration_ms: 13.554879
+  type: 'test'
+  ...
+# Subtest: RFC6455 masked text and split TCP packets decode
+ok 43 - RFC6455 masked text and split TCP packets decode
+  ---
+  duration_ms: 2.512789
+  type: 'test'
+  ...
+# Subtest: RFC6455 fragmented text reconstructs UTF-8
+ok 44 - RFC6455 fragmented text reconstructs UTF-8
+  ---
+  duration_ms: 0.500698
+  type: 'test'
+  ...
+# Subtest: RFC6455 unmasked client frames are rejected
+ok 45 - RFC6455 unmasked client frames are rejected
+  ---
+  duration_ms: 0.668342
+  type: 'test'
+  ...
+# Subtest: RFC6455 ping receives pong
+ok 46 - RFC6455 ping receives pong
+  ---
+  duration_ms: 0.431763
+  type: 'test'
+  ...
+# Subtest: RFC6455 invalid UTF-8 is rejected
+ok 47 - RFC6455 invalid UTF-8 is rejected
+  ---
+  duration_ms: 0.366124
+  type: 'test'
+  ...
+# Subtest: RFC6455 message budget rejects excessive payload
+ok 48 - RFC6455 message budget rejects excessive payload
+  ---
+  duration_ms: 0.434829
+  type: 'test'
+  ...
+1..48
+# tests 66
+# suites 0
+# pass 66
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 915.236489
