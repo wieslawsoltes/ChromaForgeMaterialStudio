@@ -1,0 +1,23 @@
+# Review the plan and persistent-disk costs before deploying in your own account.
+# This is configuration only; no service has been provisioned.
+services:
+  - type: web
+    name: chromaforge
+    runtime: node
+    plan: 1c-2g
+    buildCommand: node scripts/build.js
+    startCommand: node server/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: ">=22.16.0 <23"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: DATA_DIR
+        value: /var/data/chromaforge
+      - key: SECURE_COOKIES
+        value: "1"
+    disk:
+      name: chromaforge-data
+      mountPath: /var/data
+      sizeGB: 1

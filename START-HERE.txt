@@ -1,0 +1,29 @@
+ChromaForge Material Studio 0.1.0
+
+COMPLETE LOCAL APP + WEBSITE + COLLABORATION
+1. Install Node.js 22.16 or newer.
+2. Open a terminal in this folder.
+3. Run: npm start
+4. Open: http://localhost:8787/
+   Direct editor: http://localhost:8787/apps/studio/
+No npm install is needed. The application has zero npm dependencies.
+
+STANDALONE EDITOR
+Open dist/ChromaForge-Standalone.html. Browser GPU/storage permissions can
+vary for local files. Use the local server above for the intended origin.
+When browser storage is unavailable, export a .cforge project to keep work.
+
+STATIC WEBSITE
+Publish the contents of dist/site to a static host, or run:
+python3 -m http.server 8080 --directory dist/site
+Static hosting alone does not run collaboration. The supplied Node server does.
+
+LIBRARIES
+Six installable local tarballs: dist/packages/
+Self-contained ES modules: dist/libraries/
+Independent renderer example: http://localhost:8787/examples/renderer.html
+
+IMPORTANT
+This is a functional engineering preview, not full Substance 3D Painter parity
+or a production-qualified replacement. No public site or npm release has been
+published. Read README.md, docs/FEATURES.md, docs/QA.md and docs/SECURITY.md.

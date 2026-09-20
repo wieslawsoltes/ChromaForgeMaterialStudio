@@ -1,0 +1,33 @@
+{
+  "name": "@chromaforge/renderer",
+  "version": "0.1.0",
+  "description": "Standalone WebGPU, WebGL2 and software compatibility material viewport",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SDK.md",
+    "FEATURES.md"
+  ],
+  "sideEffects": false,
+  "license": "MIT",
+  "keywords": [
+    "chromaforge",
+    "webgpu",
+    "material",
+    "painting"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  }
+}

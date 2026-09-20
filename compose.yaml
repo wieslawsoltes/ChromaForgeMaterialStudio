@@ -1,0 +1,16 @@
+services:
+  chromaforge:
+    build: .
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8787
+      DATA_DIR: /var/lib/chromaforge
+      SECURE_COOKIES: "0"
+    volumes:
+      - chromaforge-data:/var/lib/chromaforge
+    restart: unless-stopped
+    init: true
+volumes:
+  chromaforge-data:

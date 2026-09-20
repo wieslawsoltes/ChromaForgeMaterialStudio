@@ -1,0 +1,25 @@
+{
+  "name": "chromaforge-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Modular browser-native PBR texture-painting studio, WebGPU renderer and collaboration service",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "test": "node --test tests/*.test.js",
+    "test:browser": "python tests/browser.py",
+    "build": "node scripts/build.js",
+    "check": "node scripts/check.js",
+    "pack:libraries": "node scripts/pack.js",
+    "test:site": "python tests/site-browser.py",
+    "build:pages": "node scripts/pages.js"
+  },
+  "license": "MIT"
+}

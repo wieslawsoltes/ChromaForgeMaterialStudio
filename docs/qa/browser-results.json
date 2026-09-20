@@ -1,0 +1,137 @@
+{
+  "mode": "CPU compatibility",
+  "loading": "offline set_content",
+  "checks": [
+    {
+      "name": "studio starts with an actual renderer",
+      "passed": true
+    },
+    {
+      "name": "four sample texture sets are exposed",
+      "passed": true
+    },
+    {
+      "name": "all 24 material assets are exposed",
+      "passed": true
+    },
+    {
+      "name": "resolution changes replay the texture maps",
+      "passed": true
+    },
+    {
+      "name": "pointer painting records editable pressure-aware strokes",
+      "passed": true
+    },
+    {
+      "name": "pointer painting changes actual texture pixels",
+      "passed": true
+    },
+    {
+      "name": "keyboard undo restores original texture pixels",
+      "passed": true
+    },
+    {
+      "name": "keyboard redo restores the stroke",
+      "passed": true
+    },
+    {
+      "name": "black mask conceals the painted layer",
+      "passed": true
+    },
+    {
+      "name": "painting a mask reveals existing material pixels",
+      "passed": true
+    },
+    {
+      "name": "mask strokes have their own target",
+      "passed": true
+    },
+    {
+      "name": "eraser removes paint without changing the base fill",
+      "passed": true
+    },
+    {
+      "name": "3D surface painting records barycentric UV strokes",
+      "passed": true
+    },
+    {
+      "name": "asset selection creates an editable procedural fill",
+      "passed": true
+    },
+    {
+      "name": "typed property editor updates the document",
+      "passed": true
+    },
+    {
+      "name": "duplicate layer creates a distinct identifier",
+      "passed": true
+    },
+    {
+      "name": "layer reordering changes the stack",
+      "passed": true
+    },
+    {
+      "name": "3D-only layout expands the viewport",
+      "passed": true
+    },
+    {
+      "name": "2D-only layout is available",
+      "passed": true
+    },
+    {
+      "name": "channel inspection changes the renderer mode",
+      "passed": true
+    },
+    {
+      "name": "command palette filters executable commands",
+      "passed": true
+    },
+    {
+      "name": "review notes are stored in the document",
+      "passed": true
+    },
+    {
+      "name": "notes can be resolved",
+      "passed": true
+    },
+    {
+      "name": "texture export produces a valid ZIP with PNGs and manifest",
+      "passed": true
+    },
+    {
+      "name": "PNG export contains actual PNG data",
+      "passed": true
+    },
+    {
+      "name": "export manifest records the actual resolution",
+      "passed": true
+    },
+    {
+      "name": "project export preserves editable operation history",
+      "passed": true
+    },
+    {
+      "name": "text decal becomes an editable image layer",
+      "passed": true
+    },
+    {
+      "name": "light theme switches without removing controls",
+      "passed": true
+    },
+    {
+      "name": "comfortable density is selectable",
+      "passed": true
+    },
+    {
+      "name": "mesh import replaces the active document with parsed geometry",
+      "passed": true
+    },
+    {
+      "name": "browser completes without uncaught JavaScript exceptions",
+      "passed": true
+    }
+  ],
+  "uncaughtErrors": [],
+  "indexedDBAvailable": false,
+  "secureContext": false
+}

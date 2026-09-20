@@ -1,0 +1,33 @@
+{
+  "name": "@chromaforge/core",
+  "version": "0.1.0",
+  "description": "Validated document operations, deterministic replicas, history, persistence and math",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SDK.md",
+    "FEATURES.md"
+  ],
+  "sideEffects": false,
+  "license": "MIT",
+  "keywords": [
+    "chromaforge",
+    "webgpu",
+    "material",
+    "painting"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  }
+}

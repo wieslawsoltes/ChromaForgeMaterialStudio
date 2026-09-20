@@ -1,0 +1,33 @@
+{
+  "name": "@chromaforge/geometry",
+  "version": "0.1.0",
+  "description": "Static triangle meshes, primitives, BVH picking and OBJ/glTF geometry interchange",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SDK.md",
+    "FEATURES.md"
+  ],
+  "sideEffects": false,
+  "license": "MIT",
+  "keywords": [
+    "chromaforge",
+    "webgpu",
+    "material",
+    "painting"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  }
+}

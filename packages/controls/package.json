@@ -1,0 +1,33 @@
+{
+  "name": "@chromaforge/controls",
+  "version": "0.1.0",
+  "description": "Framework-free accessible slider and splitter web components with command registry",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SDK.md",
+    "FEATURES.md"
+  ],
+  "sideEffects": true,
+  "license": "MIT",
+  "keywords": [
+    "chromaforge",
+    "webgpu",
+    "material",
+    "painting"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  }
+}

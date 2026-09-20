@@ -1,0 +1,59 @@
+{
+  "mode": "CPU compatibility",
+  "loading": "offline set_content",
+  "checks": [
+    {
+      "name": "website initializes an actual material renderer",
+      "passed": true
+    },
+    {
+      "name": "desktop website has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "material switcher exposes selected state",
+      "passed": true
+    },
+    {
+      "name": "material switcher changes rendered pixels",
+      "passed": true
+    },
+    {
+      "name": "website preview supports real orbit interaction",
+      "passed": true
+    },
+    {
+      "name": "static studio links resolve within the site",
+      "passed": true
+    },
+    {
+      "name": "mobile website has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile hero contains the complete interactive preview",
+      "passed": true
+    },
+    {
+      "name": "independent renderer example initializes without the studio",
+      "passed": true
+    },
+    {
+      "name": "example model selection replaces mesh geometry",
+      "passed": true
+    },
+    {
+      "name": "example material selection changes rendered pixels",
+      "passed": true
+    },
+    {
+      "name": "example wireframe control changes rendering settings",
+      "passed": true
+    },
+    {
+      "name": "website and SDK browser checks have no uncaught exceptions",
+      "passed": true
+    }
+  ],
+  "errors": []
+}
