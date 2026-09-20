@@ -1,0 +1,101 @@
+name: Import complete source
+on:
+  push:
+    branches: [main]
+    paths: ['.bootstrap/**', '.github/workflows/import.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: initial-source-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Verify and restore complete source
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,lzma,shutil
+          from pathlib import Path,PurePosixPath
+          parts=sorted(Path('.bootstrap').glob('source.*.part'))
+          if parts:
+              assert len(parts)==9, 'Incomplete source transfer'
+              raw=b''.join(p.read_bytes() for p in parts)
+              digest=hashlib.sha256(raw).hexdigest()
+              assert digest=='d173cb6e4e1b2af18f01480df960549eeae86e0e4639d89d2704305e4d6ca5cd', 'Source checksum mismatch'
+              files=json.loads(lzma.decompress(raw))
+              assert len(files)==83
+              for name,text in files.items():
+                  path=PurePosixPath(name)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert path.parts[0] not in ('.git','.github','.bootstrap')
+                  target=Path(name)
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  target.write_text(text,encoding='utf-8')
+              Path('docs/IMPORT.md').write_text('# Source import\n\nThe complete application, six libraries, server, tests and documentation were imported from ChromaForge-Source.zip. Original archive SHA-256: `3924cdf05b852372da5561a3b301825b5cc79a7e21527ce5e027e314b6e65f1f`.\n\nPages build configuration and deployment documentation were added before transfer. All 83 source files were transferred with combined SHA-256 verification. Bundles, package tarballs and browser screenshots are regenerated from this source rather than copied as opaque binaries. No runtime database, credentials or npm cache is included.\n',encoding='utf-8')
+              shutil.rmtree('.bootstrap')
+              print(f'Restored {len(files)} source files; SHA-256 {digest}')
+          else:
+              assert Path('package.json').is_file(), 'No source available'
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all -- . ':!.github'
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: import complete ChromaForge studio, modular libraries, server and tests'
+            git push origin HEAD:main
+          fi
+      - name: Validate JavaScript and run Node tests
+        run: |
+          npm run check
+          mkdir -p docs/qa
+          npm test | tee docs/qa/node-results.txt
+      - name: Build standalone application
+        run: npm run build
+      - name: Install browser test tools
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+          python3 - <<'PY' >> "$GITHUB_ENV"
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              print('CF_BROWSER='+p.chromium.executable_path)
+          PY
+      - name: Run studio browser checks and capture preview
+        run: |
+          python3 tests/browser.py
+          cp docs/qa/studio-dark.png apps/site/studio-preview.png
+      - name: Package libraries and build Pages website
+        run: |
+          npm run pack:libraries
+          npm run build:pages
+      - name: Run website and standalone SDK browser checks
+        run: python3 tests/site-browser.py
+      - name: Record rebuilt distribution
+        run: |
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          Path('dist/site/README.txt').write_text('ChromaForge Material Studio 0.1.0\nServe this directory as a static website. The studio is at ./studio/.\nAccounts, shared rooms and SQLite require the separate Node.js collaboration server.\n',encoding='utf-8')
+          records={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(Path('dist').rglob('*')) if p.is_file() and p.name!='release-manifest.json'}
+          Path('dist/release-manifest.json').write_text(json.dumps({'version':'0.1.0','sha256':records},indent=2)+'\n',encoding='utf-8')
+          PY
+          git add --all -- . ':!.github'
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: add validated standalone app, static site, library packages and browser evidence'
+            git push origin HEAD:main
+          fi
+      - name: Preserve validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chromaforge-import-validation
+          path: docs/qa
+          if-no-files-found: warn
