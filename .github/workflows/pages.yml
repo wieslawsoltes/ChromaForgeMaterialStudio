@@ -1,0 +1,82 @@
+name: Deploy GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - run: npm run check
+      - run: npm test
+      - run: npm run pack:libraries
+      - run: npm run build:pages
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish static website
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Verify published commit and public resources
+        env:
+          CF_PAGES_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          node --input-type=module <<'JS'
+          import { appendFileSync } from 'node:fs';
+          const base=new URL(process.env.CF_PAGES_URL);
+          if(base.protocol!=='https:') throw new Error('Expected HTTPS Pages URL');
+          const expected=process.env.GITHUB_SHA;
+          const pause=ms=>new Promise(r=>setTimeout(r,ms));
+          let info;
+          for(let attempt=0;attempt<18;attempt++){
+            try{
+              const url=new URL('build-info.json',base);url.searchParams.set('commit',expected);
+              const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(15000)});
+              if(response.ok){info=await response.json();if(info.commit===expected)break;}
+            }catch(error){console.log('Waiting for Pages propagation:',error.message);}
+            await pause(5000);
+          }
+          if(info?.commit!==expected) throw new Error('Published build metadata does not match deployed commit');
+          const files=['','studio/','examples/renderer.html','examples/renderer.js','site.css','site.js','studio-preview.png','libraries/core.js','libraries/geometry.js','libraries/paint.js','libraries/renderer.js','libraries/controls.js','libraries/collab.js','downloads/ChromaForge-Standalone.html'];
+          for(const path of files){
+            const url=new URL(path,base);url.searchParams.set('commit',expected);
+            const response=await fetch(url,{signal:AbortSignal.timeout(20000)});
+            if(!response.ok)throw new Error(`${path||'/'}: HTTP ${response.status}`);
+            const data=new Uint8Array(await response.arrayBuffer());
+            if(data.length===0)throw new Error(`${path}: empty response`);
+            if(path.endsWith('.png')&&data.slice(0,8).join(',')!=='137,80,78,71,13,10,26,10')throw new Error('Preview is not a PNG');
+            if(['','studio/','examples/renderer.html','downloads/ChromaForge-Standalone.html'].includes(path)&&!new TextDecoder().decode(data).includes('ChromaForge'))throw new Error(`${path}: unexpected page content`);
+            console.log(`PASS ${path||'/'} (${data.length} bytes)`);
+          }
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY,`## ChromaForge is live\n\n[Website](${base}) · [Studio](${new URL('studio/',base)})\n\nVerified ${files.length} public resources and build commit ${expected}.\n\nGitHub Pages hosts the static editor. Accounts, shared rooms, WebSockets and SQLite require the separate Node.js server.\n`);
+          JS
